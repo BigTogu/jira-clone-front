@@ -27,8 +27,8 @@ export default function Register() {
 
           <p className="font-bold text-3xl">Jira</p>
         </div>
-        <div className="flex flex-wrap -mx-3 mb-1 lg:mb-6">
-          <div className="w-full md:w-1/2 px-3 mb-3 lg:mb-6 md:mb-0">
+        <div className="flex flex-wrap -mx-3 mb-1">
+          <div className="w-full md:w-1/2 px-3 mb-3 lg:mb-6">
             <label
               className="block uppercase tracking-wide text-gray-700 text-[10px] lg:text-xs font-bold mb-2"
               for="grid-first-name"
@@ -121,7 +121,7 @@ export default function Register() {
           <input
             type="submit"
             value="Register"
-            className="bg-blue-500 text-white py-2 rounded-3xl font-semibold shadow-blue-950 shadow-md cursor-pointer w-full text-[10px] lg:text-xs"
+            className="bg-blue-500 text-white py-2 rounded-3xl font-semibold shadow-blue-950 shadow-md cursor-pointer w-full text-[10px] lg:text-base"
             onClick={handleRegister}
           />
         </div>

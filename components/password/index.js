@@ -17,7 +17,7 @@ function PasswordComponent() {
         >
           Password
         </label>
-        <div className="flex flex-row items-center gap-3  w-full bg-gray-50 focus:bg-white focus:border-blue-400 border-gray-200 rounded-xl py-3 mb-1 lg:mb-3 ">
+        <div className="flex flex-row items-center gap-3  w-full bg-gray-50 focus:bg-white focus:border-blue-400 border-gray-200 rounded-xl py-2 lg:py-3 mb-1 lg:mb-3 ">
           <input
             className="appearance-none block w-full rounded-xl text-gray-700 border px-4  leading-tight focus:outline-none  text-[10px] lg:text-xs border-none bg-gray-50"
             type={isVisible ? "text" : "password"}

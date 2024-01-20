@@ -1,22 +1,22 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 function Button({ value, text, link, textLink }) {
-  return (
-    <div className="w-full lg:mb-3 md:mb-0 flex flex-col items-center">
-      <input
-        type="submit"
-        value={value}
-        className="bg-blue-500 text-white py-2 rounded-3xl font-semibold shadow-blue-950 shadow-md cursor-pointer text-[10px] lg:text-base w-3/4"
-      />
-      <p className="text-[10px] lg:text-base text-gray-500 flex justify-center mt-3">
-        {text}
-        {"\u00A0"}
-        <Link className="text-blue-500" href={link}>
-          {textLink}
-        </Link>
-      </p>
-    </div>
-  );
+	return (
+		<div className="flex w-full flex-col items-center md:mb-0 lg:mb-3">
+			<input
+				type="submit"
+				value={value}
+				className="w-3/4 cursor-pointer rounded-3xl bg-blue-500 py-2 text-[10px] font-semibold text-white shadow-md shadow-blue-950 lg:text-base"
+			/>
+			<p className="mt-3 flex justify-center text-[10px] text-gray-500 lg:text-base">
+				{text}
+				{'\u00A0'}
+				<Link className="text-blue-500" href={link}>
+					{textLink}
+				</Link>
+			</p>
+		</div>
+	);
 }
 
 export default Button;

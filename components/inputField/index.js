@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react';
 
 function InputField({ label, placeholder, name, type, className }) {
-  return (
-    <div className={className}>
-      <label className="block uppercase tracking-wide text-gray-700 text-[10px] lg:text-xs font-bold mb-2">
-        {label}
-      </label>
-      <input
-        className="appearance-none block w-full bg-gray-50 text-gray-700 border border-gray-200  py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-blue-400 rounded-xl text-[10px] lg:text-xs"
-        type={type}
-        name={name}
-        placeholder={placeholder}
-      />
-    </div>
-  );
+	return (
+		<div className={className}>
+			<label className="mb-2 block text-[10px] font-bold uppercase tracking-wide text-gray-700 lg:text-xs">
+				{label}
+			</label>
+			<input
+				className="block w-full appearance-none rounded-xl border border-gray-200 bg-gray-50  px-4 py-3 text-[10px] leading-tight text-gray-700 focus:border-blue-400 focus:bg-white focus:outline-none lg:text-xs"
+				type={type}
+				name={name}
+				placeholder={placeholder}
+			/>
+		</div>
+	);
 }
 
 export default InputField;

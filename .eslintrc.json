@@ -1,3 +1,22 @@
 {
-  "extends": "next/core-web-vitals"
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": ["eslint:recommended", "next", "next/core-web-vitals"],
+	"plugins": ["simple-import-sort"],
+	"parserOptions": {
+		"ecmaVersion": "latest",
+		"sourceType": "module"
+	},
+	"rules": {
+		"import/no-default-export": "off",
+		"import/no-extraneous-dependencies": "off",
+		"indent": ["error", "tab"],
+		"linebreak-style": ["error", "unix"],
+		"quotes": ["error", "single"],
+		"semi": ["error", "always"],
+		"func-style": ["error", "declaration"],
+		"no-console": ["error", { "allow": ["warn", "error", "info"] }]
+	}
 }

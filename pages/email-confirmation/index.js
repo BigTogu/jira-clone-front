@@ -4,9 +4,10 @@ import { useRouter } from 'next/router';
 export default function EmailConfirmation() {
 	const router = useRouter();
 	const { token } = router.query;
+
 	useEffect(() => {
 		if (!token) {
-			console.error('missing the token param on the url');
+			console.log('missing the token parameter');
 			router.push('/register');
 			return;
 		}
@@ -15,6 +16,7 @@ export default function EmailConfirmation() {
 			headers: { 'Content-Type': 'application/json' },
 		})
 			.then(response => {
+				localStorage.setItem('token', token);
 				return response.json().then(() => {
 					router.push('/home');
 				});

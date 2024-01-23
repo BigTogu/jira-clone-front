@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { validateEmail, validatePassword } from '../../utils/validate/index.js';
-import registerCall from '../../services/registerCall.js';
+import loginCall from '../../services/loginCall.js';
 import SuccessSubmit from '../../UI/succesSubmit/index.js';
 import FormComponent from '../../components/form/index.js';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const loginFields = [
 	{
-		label: 'Email',
-		name: 'email',
-		type: 'email',
-		placeholder: 'silvia.kenaan@gmail.com',
-		className: 'w-full px-3',
+		label: 'First Name',
+		name: 'username',
+		type: 'text',
+		placeholder: 'Silvia',
+		className: 'px-3 w-full',
 	},
 	{
 		type: 'password',
@@ -18,9 +20,10 @@ const loginFields = [
 ];
 
 function Login() {
+	const router = useRouter();
+
 	const [isRegistrationSuccessful, setIsRegistrationSuccessful] =
 		useState(false);
-
 	function handleSubmit(event) {
 		event.preventDefault();
 		const formData = new FormData(event.target);
@@ -31,7 +34,6 @@ function Login() {
 		const data = Object.fromEntries(formData.entries());
 
 		const password = data.password;
-		const email = data.email;
 
 		if (isEmpty) {
 			alert('Please fill all the fields');
@@ -42,11 +44,8 @@ function Login() {
 			return;
 		}
 
-		if (!validateEmail(email)) {
-			alert('Email is invalid.');
-			return;
-		}
-		registerCall(data, setIsRegistrationSuccessful);
+		loginCall(data, setIsRegistrationSuccessful);
+		router.push('/home');
 
 		event.currentTarget.reset();
 	}

@@ -1,7 +1,7 @@
 // createBoardForm.js
 import React from 'react';
-import inviteToBoard from '../../../services/invite-to-board.js';
-import FormGroup from '../formGroup/index.js';
+import inviteToBoard from '../../../services/board/invite-to-board.js';
+import InvitationForm from '../InvitationForm/index.js';
 
 function CreateInvitationForm({ onSuccess, onError, board }) {
 	async function handleSubmit(event) {
@@ -22,7 +22,7 @@ function CreateInvitationForm({ onSuccess, onError, board }) {
 		}
 	}
 
-	return <FormGroup handleSubmit={handleSubmit} />;
+	return <InvitationForm handleSubmit={handleSubmit} />;
 }
 
 export default CreateInvitationForm;

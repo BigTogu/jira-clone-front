@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
-import InputField from '../input-field/index.js';
-import PasswordComponent from '../password/index.js';
-import Button from '../button/index.js';
+import InputField from '../Form/InputField/index.js';
+import PasswordComponent from '../Form/PasswordField/index.js';
+import Button from '../Form/ButtonForm/index.js';
 import Image from 'next/image';
 import IconoJira from '../../public/assets/icono_Jira_Clone.svg';
 
@@ -41,7 +41,7 @@ function FormRow({ fields }) {
 		</div>
 	);
 }
-function FormComponent({
+function Form({
 	fields,
 	handleSubmit,
 	buttonLabel,
@@ -98,4 +98,4 @@ function FormComponent({
 	);
 }
 
-export default FormComponent;
+export default Form;

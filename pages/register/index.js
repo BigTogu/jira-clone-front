@@ -1,9 +1,9 @@
 import React from 'react';
-import registerCall from '../../services/authServices/register-call.js';
+import registerCall from '../../services/auth-services/register-call.js';
 import SuccessSubmit from '../../UI/succesSubmit/index.js';
-import FormComponent from '../../components/form/index.js';
-import useFormSubmission from '../../services/hooks.js';
-import Slogan from '../../components/title-register/index.js';
+import Form from '../../components/Form/index.js';
+import useFormSubmission from '../../hooks/hooks.js';
+import Slogan from '../../components/TitleRegister/index.js';
 
 const registerFields = [
 	[
@@ -50,7 +50,7 @@ export default function Register() {
 					{!isLoading && (
 						<>
 							{!isSubmissionSuccessful ? (
-								<FormComponent
+								<Form
 									fields={registerFields}
 									handleSubmit={handleSubmit}
 									buttonText="Register"

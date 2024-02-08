@@ -1,11 +1,11 @@
-import ListBoards from '../../components/list-boards/index.js';
-import ModalForCreateGroup from '../../components/modal-group/index.js';
+import ListBoards from '../../components/ListBoards/index.js';
+import CreateBoard from '../../components/CreateBoard/index.js';
 
 export default function Home() {
 	return (
 		<>
 			<ListBoards />
-			<ModalForCreateGroup />
+			<CreateBoard />
 		</>
 	);
 }

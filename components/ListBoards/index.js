@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import CreateGroupModal from '../modal/create-group/index.js';
-import CreateInvitationForm from '../modal/create-invitation/index.js';
-import getBoards from '../../services/get-boards.js';
+import Modal from '../Modal/index.js';
+import InvitationForm from '../Modal/InvitationModal/index.js';
+import getBoards from '../../services/board/get-boards.js';
 import { atom, useAtom } from 'jotai';
 
 export const boardsAtom = atom([]);
@@ -33,7 +33,7 @@ function ListBoards() {
 					key={board.id}
 					className="rounded-md border-2 border-gray-300 p-4 shadow-md"
 				>
-					<CreateGroupModal
+					<Modal
 						open={open}
 						setOpen={setOpen}
 						errorMessage={errorMessage}
@@ -46,13 +46,13 @@ function ListBoards() {
 							<p className="my-2.5 text-base leading-4">
 								Invita a un nuevo miembro a tu grupo.
 							</p>
-							<CreateInvitationForm
+							<InvitationForm
 								onSuccess={handleSuccess}
 								onError={handleError}
 								board={board}
 							/>
 						</div>
-					</CreateGroupModal>
+					</Modal>
 				</div>
 			))}
 		</>

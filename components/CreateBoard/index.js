@@ -1,8 +1,8 @@
-import CreateGroupModal from '../modal/create-group/index.js';
-import CreateBoardForm from '../modal/create-board-form/index.js';
+import Modal from '../Modal/index.js';
+import CreateModal from '../Modal/CreateModal/index.js';
 import { useState } from 'react';
 
-function ModalForCreateGroup() {
+function CreateBoard() {
 	const [open, setOpen] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
 
@@ -16,7 +16,7 @@ function ModalForCreateGroup() {
 	}
 
 	return (
-		<CreateGroupModal
+		<Modal
 			open={open}
 			setOpen={setOpen}
 			errorMessage={errorMessage}
@@ -27,10 +27,10 @@ function ModalForCreateGroup() {
 				<p className="my-2.5 text-base leading-4">
 					Make your board here and invite people. Click save when you are done.
 				</p>
-				<CreateBoardForm onSuccess={handleSuccess} onError={handleError} />
+				<CreateModal onSuccess={handleSuccess} onError={handleError} />
 			</div>
-		</CreateGroupModal>
+		</Modal>
 	);
 }
 
-export default ModalForCreateGroup;
+export default CreateBoard;

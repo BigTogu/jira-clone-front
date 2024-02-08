@@ -1,5 +1,5 @@
-import EyeOpen from '../../public/assets/eye-opened.svg';
-import EyeClose from '../../public/assets/eye-closed.svg';
+import EyeOpen from '../../../public/assets/eye-opened.svg';
+import EyeClose from '../../../public/assets/eye-closed.svg';
 
 import Image from 'next/image';
 import React, { useState } from 'react';

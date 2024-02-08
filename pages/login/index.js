@@ -1,8 +1,9 @@
 import React from 'react';
 import SuccessSubmit from '../../UI/succesSubmit/index.js';
-import FormComponent from '../../components/form/index.js';
-import useFormSubmission from '../../services/hooks.js';
-import loginCall from '../../services/authServices/login-call.js';
+
+import useFormSubmission from '../../hooks/hooks.js';
+import loginCall from '../../services/auth-services/login-call.js';
+import Form from '../../components/Form/index.js';
 
 const loginFields = [
 	{
@@ -32,7 +33,7 @@ function Login() {
 			{isLoading ? (
 				<div>Loading...</div>
 			) : !isSubmissionSuccessful ? (
-				<FormComponent
+				<Form
 					fields={loginFields}
 					handleSubmit={handleSubmit}
 					buttonText="Log In"

@@ -9,11 +9,11 @@ function PasswordComponent() {
 	const [password, setPassword] = useState('');
 
 	return (
-		<div className="-mx-3 mb-1 flex flex-wrap lg:mb-6">
-			<div className="w-full px-3">
+		<div className="w-full px-3">
+			<div>
 				<label
 					className="mb-2 block text-[10px] font-bold uppercase tracking-wide text-gray-700 lg:text-xs"
-					htmlFor="grid-password"
+					htmlFor="password"
 				>
 					Password
 				</label>
@@ -25,24 +25,22 @@ function PasswordComponent() {
 						placeholder="******************"
 						value={password}
 						onChange={e => setPassword(e.target.value)}
+						id="password"
+						aria-label="Password"
 					/>
-					<span className="px-3">
-						{isVisible ? (
-							<Image
-								className="h-5 w-auto"
-								src={EyeOpen}
-								alt="Icono ojo abierto"
-								onClick={() => password && setIsVisible(!isVisible)}
-							/>
-						) : (
-							<Image
-								className="h-5 w-auto"
-								src={EyeClose}
-								alt="Icono ojo cerrado"
-								onClick={() => password && setIsVisible(!isVisible)}
-							/>
-						)}
-					</span>
+					<button
+						type="button"
+						onClick={() => setIsVisible(!isVisible)}
+						className="px-3"
+						aria-label={isVisible ? 'Hide password' : 'Show password'}
+					>
+						<Image
+							src={isVisible ? EyeOpen : EyeClose}
+							alt={isVisible ? 'Hide password' : 'Show password'}
+							width={20}
+							height={20}
+						/>
+					</button>
 				</div>
 				<p className="text-[10px] italic text-gray-600 max-lg:mb-1 lg:text-xs">
 					Make it as long and as crazy as you would like

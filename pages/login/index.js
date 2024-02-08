@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
-import { validateEmail, validatePassword } from '../../utils/validate/index.js';
-import loginCall from '../../services/loginCall.js';
+import React from 'react';
 import SuccessSubmit from '../../UI/succesSubmit/index.js';
 import FormComponent from '../../components/form/index.js';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import useFormSubmission from '../../services/hooks.js';
+import loginCall from '../../services/authServices/login-call.js';
 
 const loginFields = [
 	{
-		label: 'First Name',
-		name: 'username',
-		type: 'text',
-		placeholder: 'Silvia',
-		className: 'px-3 w-full',
+		label: 'Email',
+		name: 'email',
+		type: 'email',
+		placeholder: 'silvia.kenaan@gmail.com',
+		className: 'w-full px-3',
 	},
 	{
 		type: 'password',
@@ -20,48 +18,28 @@ const loginFields = [
 ];
 
 function Login() {
-	const router = useRouter();
+	const { isSubmissionSuccessful, handleSubmit, isLoading } = useFormSubmission(
+		async data => {
+			return await loginCall(data);
+		},
+	);
 
-	const [isRegistrationSuccessful, setIsRegistrationSuccessful] =
-		useState(false);
-	function handleSubmit(event) {
-		event.preventDefault();
-		const formData = new FormData(event.target);
-
-		const values = [...formData.values()];
-		const isEmpty = values.some(value => value === '');
-
-		const data = Object.fromEntries(formData.entries());
-
-		const password = data.password;
-
-		if (isEmpty) {
-			alert('Please fill all the fields');
-			return;
-		}
-		if (!validatePassword(password)) {
-			alert('Password does not meet the requirements.');
-			return;
-		}
-
-		loginCall(data, setIsRegistrationSuccessful);
-		router.push('/home');
-
-		event.currentTarget.reset();
-	}
 	return (
 		<div className="custom-gradient flex h-screen w-screen flex-col items-center justify-center">
-			{!isRegistrationSuccessful ? (
+			<div aria-busy={isLoading ? 'true' : 'false'}>
+				{isLoading && <div>Loading...</div>}
+			</div>
+			{isLoading ? (
+				<div>Loading...</div>
+			) : !isSubmissionSuccessful ? (
 				<FormComponent
 					fields={loginFields}
 					handleSubmit={handleSubmit}
 					buttonText="Log In"
-					buttonLabel="Register"
-					linkInfo="/register"
-					descriptionLink="Do not have an account?"
+					linkInfo={{ href: '/register', text: 'Do not have an account?' }}
 				/>
 			) : (
-				<SuccessSubmit />
+				<SuccessSubmit message="Login Successful!" />
 			)}
 		</div>
 	);

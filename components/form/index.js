@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import InputField from '../inputField/index.js';
+import InputField from '../input-field/index.js';
 import PasswordComponent from '../password/index.js';
 import Button from '../button/index.js';
 import Image from 'next/image';
@@ -18,14 +18,14 @@ function FormHeader() {
 	);
 }
 
-function FormField({ field, index }) {
-	if (field.type === 'password') {
-		return <PasswordComponent key={index} {...field} />;
-	}
-
+function FormField({ field }) {
 	return (
-		<div key={index} className="-mx-3 mb-1 flex flex-wrap md:mb-6">
-			<InputField {...field} />
+		<div className="-mx-3 mb-1 flex flex-wrap md:mb-6">
+			{field.type === 'password' ? (
+				<PasswordComponent {...field} />
+			) : (
+				<InputField {...field} />
+			)}
 		</div>
 	);
 }
@@ -75,11 +75,11 @@ function FormComponent({
 				}}
 			>
 				<FormHeader />
-				{fields.map((field, index) =>
+				{fields.map(field =>
 					field.length > 1 ? (
-						<FormRow key={index} fields={field} />
+						<FormRow key={field.name} fields={field} />
 					) : (
-						<FormField key={index} field={field} />
+						<FormField key={field.name} field={field} />
 					),
 				)}
 

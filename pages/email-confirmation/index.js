@@ -1,30 +1,22 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import emailConfirmation from '../../services/authServices/email-confirmation';
 
-export default function EmailConfirmation() {
+function EmailConfirmation() {
 	const router = useRouter();
 	const { token } = router.query;
 
 	useEffect(() => {
 		if (!token) {
-			console.log('missing the token parameter');
+			console.error('missing the token parameter');
 			router.push('/register');
 			return;
 		}
-		fetch(`http://localhost:8000/email-confirmation/${token}`, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-		})
-			.then(response => {
-				localStorage.setItem('token', token);
-				return response.json().then(() => {
-					router.push('/home');
-				});
-			})
-			.catch(error => {
-				console.error(error);
-			});
+
+		emailConfirmation(token, router);
 	}, [router, token]);
 
-	return <div>Hola</div>;
+	return <div>Email-Confirmation</div>;
 }
+
+export default EmailConfirmation;

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-function Button({ value, text, link, textLink }) {
+function ButtonForm({ value, text, link, textLink }) {
 	return (
 		<div className="flex w-full flex-col items-center md:mb-0 lg:mb-3">
 			<input
@@ -19,4 +19,4 @@ function Button({ value, text, link, textLink }) {
 	);
 }
 
-export default Button;
+export default ButtonForm;

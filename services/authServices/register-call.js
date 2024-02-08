@@ -1,4 +1,4 @@
-function registerCall(data, setIsRegistrationSuccessful) {
+function registerCall(data) {
 	return fetch('http://localhost:8000/register', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
@@ -6,13 +6,13 @@ function registerCall(data, setIsRegistrationSuccessful) {
 	})
 		.then(response => {
 			if (response.ok) {
-				setIsRegistrationSuccessful(true);
+				return true;
 			} else {
-				setIsRegistrationSuccessful(false);
+				return false;
 			}
 		})
 		.catch(error => {
-			console.log(error);
+			console.error(error);
 		});
 }
 

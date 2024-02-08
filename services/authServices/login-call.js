@@ -1,19 +1,18 @@
-function loginCall(data, setIsRegistrationSuccessful) {
+function loginCall(data) {
 	return fetch('http://localhost:8000/login', {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify(data),
 	})
 		.then(response => {
-			console.log(response, 'response');
 			if (response.ok) {
-				setIsRegistrationSuccessful(true);
+				return true;
 			} else {
-				setIsRegistrationSuccessful(false);
+				return false;
 			}
 		})
 		.catch(error => {
-			console.log(error);
+			console.error(error);
 		});
 }
 

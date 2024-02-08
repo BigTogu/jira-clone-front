@@ -1,5 +1,5 @@
 import Modal from '../Modal/index.js';
-import CreateModal from '../Modal/CreateModal/index.js';
+import CreateBoardModal from '../Modal/CreateBoardModal/index.js';
 import { useState } from 'react';
 
 function CreateBoard() {
@@ -27,7 +27,7 @@ function CreateBoard() {
 				<p className="my-2.5 text-base leading-4">
 					Make your board here and invite people. Click save when you are done.
 				</p>
-				<CreateModal onSuccess={handleSuccess} onError={handleError} />
+				<CreateBoardModal onSuccess={handleSuccess} onError={handleError} />
 			</div>
 		</Modal>
 	);

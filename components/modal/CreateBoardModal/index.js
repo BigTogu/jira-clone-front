@@ -1,12 +1,12 @@
 // createBoardForm.js
 import React from 'react';
 import createBoard from '../../../services/board/create-board.js';
-import BoardForm from '../BoardForm/index.js';
+import BoardForm from '../CreateBoardForm/index.js';
 
 import { useSetAtom } from 'jotai';
 import { boardsAtom } from '../../ListBoards/index.js';
 
-function CreateModal({ onSuccess, onError }) {
+function CreateBoardModal({ onSuccess, onError }) {
 	const setBoards = useSetAtom(boardsAtom);
 
 	async function handleSubmit(event) {
@@ -34,4 +34,4 @@ function CreateModal({ onSuccess, onError }) {
 	return <BoardForm handleSubmit={handleSubmit} />;
 }
 
-export default CreateModal;
+export default CreateBoardModal;

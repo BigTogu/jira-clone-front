@@ -9,14 +9,14 @@ function createBoard(data) {
 	})
 		.then(response => {
 			if (response.ok) {
-				return true;
+				return response.json();
 			} else {
-				return false;
+				throw new Error('Failed to create board');
 			}
 		})
 		.catch(error => {
 			console.error(error);
-			return false;
+			throw error;
 		});
 }
 

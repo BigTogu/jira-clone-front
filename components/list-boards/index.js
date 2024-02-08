@@ -1,48 +1,30 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import CreateGroupModal from '../modal/create-group/index.js';
+import CreateInvitationForm from '../modal/create-invitation/index.js';
 import getBoards from '../../services/get-boards.js';
-import Modal from '../modal/index.js';
 import { atom, useAtom } from 'jotai';
-import { useRouter } from 'next/router';
+
 export const boardsAtom = atom([]);
 
 function ListBoards() {
-	const router = useRouter();
-	const currentPath = router.pathname;
-
-	function handleClick(groupId) {
-		const currentQuery = { ...router.query, group: groupId };
-		router.push(
-			{
-				pathname: currentPath,
-				query: currentQuery,
-			},
-			undefined,
-			{ shallow: true, scroll: false },
-		);
-	}
-
-	const isModalOpen = router.query.group;
-
-	function handleClose() {
-		const newQuery = { ...router.query };
-		delete newQuery.group;
-
-		router.replace(
-			{
-				pathname: currentPath,
-				query: newQuery,
-			},
-			undefined,
-			{ shallow: true, scroll: false },
-		);
-	}
-
+	const [open, setOpen] = useState(false);
+	const [errorMessage, setErrorMessage] = useState('');
 	const [boards, setBoards] = useAtom(boardsAtom);
+
 	useEffect(() => {
 		getBoards().then(data => {
 			if (data) setBoards(data.boards);
 		});
 	}, [setBoards]);
+
+	function handleSuccess() {
+		setOpen(false);
+		setErrorMessage('');
+	}
+
+	function handleError(message) {
+		setErrorMessage(message);
+	}
 
 	return (
 		<>
@@ -51,15 +33,26 @@ function ListBoards() {
 					key={board.id}
 					className="rounded-md border-2 border-gray-300 p-4 shadow-md"
 				>
-					<Modal
-						board={board}
-						labelButton={board.name}
-						dialogTitle={'Invitar a un nuevo miembro'}
-						dialogDescription={'Invita a un nuevo miembro a tu grupo.'}
-						isModalOpen={isModalOpen}
-						handleClose={handleClose}
-						handleClick={handleClick}
-					></Modal>
+					<CreateGroupModal
+						open={open}
+						setOpen={setOpen}
+						errorMessage={errorMessage}
+						triggerTitle={board.name}
+					>
+						<div>
+							<h2 className="text-lg font-semibold">
+								Invitar a un nuevo miembro
+							</h2>
+							<p className="my-2.5 text-base leading-4">
+								Invita a un nuevo miembro a tu grupo.
+							</p>
+							<CreateInvitationForm
+								onSuccess={handleSuccess}
+								onError={handleError}
+								board={board}
+							/>
+						</div>
+					</CreateGroupModal>
 				</div>
 			))}
 		</>

@@ -9,14 +9,15 @@ export function validateEmail(email) {
 }
 
 // Función para manejar las validaciones
-export function validateFields(values, password, email) {
-	if (values.some(value => value === '')) {
-		return 'Please fill all the fields.';
+export function validateFields(data) {
+	if (Object.values(data).some(field => field === '')) {
+		return 'All fields are required.';
 	}
-	if (!validatePassword(password)) {
+
+	if (!validatePassword(data.password)) {
 		return 'Password does not meet the requirements.';
 	}
-	if (!validateEmail(email)) {
+	if (!validateEmail(data.email)) {
 		return 'Email is invalid.';
 	}
 	return null;

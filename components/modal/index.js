@@ -1,6 +1,6 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import createBoard from '../../services/createBoard.js';
-import inviteToBoard from '../../services/inviteToBoard.js';
+import createBoard from '../../services/create-board.js';
+import inviteToBoard from '../../services/invite-to-board.js';
 import FormModal from './form/index.js';
 import FormGroup from './formGroup/index.js';
 

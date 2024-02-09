@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import emailConfirmation from '../../services/authServices/email-confirmation';
+import emailConfirmation from '../../services/auth-services/email-confirmation.js';
 
 function EmailConfirmation() {
 	const router = useRouter();

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useSetAtom } from 'jotai';
 import { todosAtom } from '../../pages/board/[id].js';
 
-function CreateTodoForm({ onCancel }) {
+function CreateTodoForm({ onCancel, status }) {
 	const setTodos = useSetAtom(todosAtom);
 	const router = useRouter();
 	const { id } = router.query;
@@ -14,11 +14,12 @@ function CreateTodoForm({ onCancel }) {
 		try {
 			const formData = new FormData(event.target);
 			const data = Object.fromEntries(formData.entries());
+
 			if (!data.title.trim()) {
 				console.error('The title cannot be empty.');
 				return;
 			}
-			const newData = { ...data, boardId: id };
+			const newData = { ...data, boardId: id, status };
 			const successResponse = await createTodo(newData);
 
 			if (successResponse) {

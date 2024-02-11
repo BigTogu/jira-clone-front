@@ -27,7 +27,7 @@ function ListBoards() {
 			</thead>
 			<tbody>
 				{boards.map(board => (
-					<tr key={board.id} className="border-y-2 border-black">
+					<tr key={board.id} className="border-b-2 border-gray-200">
 						<td className="py-2">
 							<Link href={`/board/${board.id}`}>{board.name}</Link>
 						</td>

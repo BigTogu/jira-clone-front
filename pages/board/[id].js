@@ -1,19 +1,53 @@
 import { useRouter } from 'next/router';
 import getTodos from '../../services/todos/get-todos.js';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import CreateTodoForm from '../../components/CreateTodoForm';
 import { atom, useAtom } from 'jotai';
 import Modal from '../../components/Modal';
 import InvitationForm from '../../components/Modal/InvitationForm';
+import AssignedForm from '../../components/AssignedForm';
+
 export const todosAtom = atom([]);
 
 export function BoardItem({ content }) {
+	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+	const dropdownRef = useRef(null);
+
+	function toggleDropdown() {
+		setIsDropdownOpen(!isDropdownOpen);
+	}
+	useEffect(() => {
+		function handleClickOutside(event) {
+			if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+				setIsDropdownOpen(false);
+			}
+		}
+
+		if (isDropdownOpen) {
+			document.addEventListener('mousedown', handleClickOutside);
+		}
+
+		return () => document.removeEventListener('mousedown', handleClickOutside);
+	}, [isDropdownOpen]);
 	return (
-		<div className="mb-2 flex h-[4rem] w-full flex-col rounded bg-white p-2 shadow">
+		<div className="relative mb-2 flex h-[4rem] w-full flex-col rounded bg-white p-2 shadow">
 			<span>{content}</span>
-			<button className="flex w-full justify-end  text-end">
+			<button
+				onClick={toggleDropdown}
+				className="flex w-full justify-end text-end"
+			>
 				<p className="aspect-square w-[20px] rounded-full bg-blue-200"></p>
 			</button>
+			{isDropdownOpen && (
+				<div
+					ref={dropdownRef}
+					className="absolute right-[30px] top-[30px] z-10 mt-1 w-56 origin-top-right rounded-md bg-white shadow-lg"
+				>
+					<div className="py-1">
+						<AssignedForm />
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }

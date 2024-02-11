@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useSetAtom } from 'jotai';
 import { todosAtom } from '../../pages/board/[id].js';
 
-function CreateTodoForm() {
+function CreateTodoForm({ onCancel }) {
 	const setTodos = useSetAtom(todosAtom);
 	const router = useRouter();
 	const { id } = router.query;
@@ -14,11 +14,16 @@ function CreateTodoForm() {
 		try {
 			const formData = new FormData(event.target);
 			const data = Object.fromEntries(formData.entries());
-			const newData = { ...data, board_id: id };
+			if (!data.title.trim()) {
+				console.error('The title cannot be empty.');
+				return;
+			}
+			const newData = { ...data, boardId: id };
 			const successResponse = await createTodo(newData);
 
 			if (successResponse) {
 				setTodos(todos => [...todos, successResponse.data]);
+				onCancel();
 			} else {
 				console.error('Failed to create board');
 			}
@@ -28,27 +33,24 @@ function CreateTodoForm() {
 	}
 
 	return (
-		<form onSubmit={handleSubmit} className="mb-2.5 flex items-center gap-3">
-			<label htmlFor="boardName" className="text-right  text-base">
-				Name
-			</label>
+		<form
+			onSubmit={handleSubmit}
+			className=" flex flex-col rounded-md bg-white px-2 pt-4 shadow "
+		>
 			<input
 				id="TodoName"
-				className="flex h-5 w-full flex-1 items-center rounded-md px-2.5 text-base shadow-md"
+				className="flex h-5 w-full focus:outline-none focus:ring-0"
 				name="title"
-				placeholder="Frontend Project"
-				required
 				aria-required="true"
 			/>
-			<div className="mt-6 flex justify-end">
-				<button
-					type="submit"
-					className="px-4 py-2 text-black hover:bg-green-300"
-					aria-label="Save the new board"
-				>
-					Save changes
-				</button>
-			</div>
+
+			<button
+				type="submit"
+				className=" py-2 text-start text-gray-500 hover:text-black"
+				aria-label="Save the new board"
+			>
+				Guardar
+			</button>
 		</form>
 	);
 }

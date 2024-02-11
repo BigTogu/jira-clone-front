@@ -18,20 +18,20 @@ function CreateBoardModal({ onSuccess, onError }) {
 			const successResponse = await createBoard(data);
 
 			if (successResponse) {
-				const dataBoard = { ...data, id: successResponse.board_id };
+				const dataBoard = { ...data, id: successResponse.boardId };
 
 				setBoards(prevBoards => [...prevBoards, dataBoard]);
 				onSuccess();
 			} else {
-				onError('Failed to create board');
+				onError('Error al crear el tablero. Intente nuevamente.');
 			}
 		} catch (error) {
-			console.error('Error creating board:', error);
-			onError('An error occurred while creating the board');
+			console.error('Error al crear el tablero:', error);
+			onError('Se produjo un error al crear el tablero.');
 		}
 	}
 
-	return <BoardForm handleSubmit={handleSubmit} />;
+	return <BoardForm onSubmit={handleSubmit} />;
 }
 
 export default CreateBoardModal;

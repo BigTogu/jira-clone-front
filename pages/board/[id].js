@@ -9,13 +9,16 @@ export const todosAtom = atom([]);
 
 export function BoardItem({ content }) {
 	return (
-		<div className="mb-2 flex h-[4rem] w-full justify-between rounded bg-white p-2 shadow">
+		<div className="mb-2 flex h-[4rem] w-full flex-col rounded bg-white p-2 shadow">
 			<span>{content}</span>
+			<button className="flex w-full justify-end  text-end">
+				<p className="aspect-square w-[20px] rounded-full bg-blue-200"></p>
+			</button>
 		</div>
 	);
 }
 
-export function BoardColumn({ title, todos }) {
+export function BoardColumn({ title, todos, status }) {
 	const [showCreateForm, setShowCreateForm] = useState(false);
 	return (
 		<div className="flex w-1/3 flex-col rounded bg-gray-100 p-4">
@@ -26,7 +29,10 @@ export function BoardColumn({ title, todos }) {
 				))}
 			</div>{' '}
 			{showCreateForm ? (
-				<CreateTodoForm onCancel={() => setShowCreateForm(false)} />
+				<CreateTodoForm
+					onCancel={() => setShowCreateForm(false)}
+					status={status}
+				/>
 			) : (
 				<button
 					onClick={() => setShowCreateForm(true)}
@@ -59,6 +65,7 @@ export default function BoardId() {
 				});
 		}
 	}, [id, setTodos]);
+
 	return (
 		<div className="container mx-auto p-4">
 			<h1 className="mb-4 text-2xl font-bold">Tablero BoardTitle</h1>
@@ -78,13 +85,17 @@ export default function BoardId() {
 				/>
 			</Modal>
 			<div className="mt-3 flex gap-4">
-				{['POR HACER', 'EN CURSO', 'LISTO'].map(status => (
-					<BoardColumn
-						key={status}
-						title={status}
-						todos={todos.filter(todo => todo.status === 'to sdo')}
-					/>
-				))}
+				{['POR HACER', 'EN CURSO', 'LISTO'].map(status => {
+					const filteredTodos = todos.filter(todo => todo.status === status);
+					return (
+						<BoardColumn
+							key={status}
+							title={status}
+							todos={filteredTodos}
+							status={status}
+						/>
+					);
+				})}
 			</div>
 		</div>
 	);

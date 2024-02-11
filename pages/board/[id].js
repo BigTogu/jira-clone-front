@@ -7,12 +7,14 @@ import Modal from '../../components/Modal';
 import InvitationForm from '../../components/Modal/InvitationForm';
 import AssignedForm from '../../components/AssignedForm';
 import { Reorder } from 'framer-motion';
+import TodoModal from '../../components/TodoModal';
 
 export const todosAtom = atom([]);
 
 export function BoardItem({ content }) {
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 	const dropdownRef = useRef(null);
+	const [isOpen, setIsOpen] = useState(false);
 
 	function toggleDropdown() {
 		setIsDropdownOpen(!isDropdownOpen);
@@ -32,13 +34,15 @@ export function BoardItem({ content }) {
 	}, [isDropdownOpen]);
 	return (
 		<div className="relative mb-2 flex h-[4rem] w-full flex-col rounded bg-white p-2 shadow">
-			<span>{content}</span>
-			<button
-				onClick={toggleDropdown}
-				className="flex w-full justify-end text-end"
-			>
-				<p className="aspect-square w-[20px] rounded-full bg-blue-200"></p>
-			</button>
+			<Modal open={isOpen} setOpen={setIsOpen} triggerTitle={content}>
+				<TodoModal />
+			</Modal>
+			<div className="flex w-full justify-end text-end">
+				<button
+					onClick={toggleDropdown}
+					className="aspect-square w-[20px] rounded-full bg-blue-200"
+				></button>
+			</div>
 			{isDropdownOpen && (
 				<div
 					ref={dropdownRef}

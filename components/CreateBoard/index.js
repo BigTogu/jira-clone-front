@@ -1,13 +1,13 @@
-import Modal from '../Modal/index.js';
-import CreateBoardModal from '../Modal/CreateBoardModal/index.js';
+import Modal from '../Modal';
+import CreateBoardModal from '../Modal/CreateBoardModal';
 import { useState } from 'react';
 
 function CreateBoard() {
-	const [open, setOpen] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
 
 	function handleSuccess() {
-		setOpen(false);
+		setIsOpen(false);
 		setErrorMessage('');
 	}
 
@@ -17,15 +17,15 @@ function CreateBoard() {
 
 	return (
 		<Modal
-			open={open}
-			setOpen={setOpen}
+			open={isOpen}
+			setOpen={setIsOpen}
 			errorMessage={errorMessage}
-			triggerTitle={'Crear Grupo'}
+			triggerTitle={'Crear Proyecto'}
 		>
 			<div>
-				<h2 className="text-lg font-semibold">Create a new board</h2>
+				<h2 className="text-lg font-semibold">Crear un nuevo tablero</h2>
 				<p className="my-2.5 text-base leading-4">
-					Make your board here and invite people. Click save when you are done.
+					Invita a más personas. Haz click en guardar al terminar.
 				</p>
 				<CreateBoardModal onSuccess={handleSuccess} onError={handleError} />
 			</div>

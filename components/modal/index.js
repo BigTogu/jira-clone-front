@@ -7,16 +7,15 @@ function CreateGroupModal({
 	errorMessage,
 	triggerTitle,
 }) {
-	function handleModalClose() {
-		setOpen(false);
-	}
 	return (
 		<Dialog.Root open={open} onOpenChange={setOpen}>
 			<Dialog.Trigger asChild>
-				<button>{triggerTitle}</button>
+				<button className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+					{triggerTitle}
+				</button>
 			</Dialog.Trigger>
 			<Dialog.Portal>
-				<Dialog.Overlay className="fixed inset-0 bg-gray-100 " />
+				<Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75" />
 				<Dialog.Content
 					aria-modal="true"
 					role="dialog"
@@ -28,7 +27,6 @@ function CreateGroupModal({
 						<button
 							className="absolute right-2  top-2 flex h-6 w-6"
 							aria-label="Close"
-							onClick={handleModalClose}
 						>
 							X
 						</button>

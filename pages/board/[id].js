@@ -121,7 +121,7 @@ export default function BoardId() {
 
 	return (
 		<div className="container mx-auto p-4">
-			<h1 className="mb-4 text-2xl font-bold">Tablero BoardTitle</h1>
+			<h1 className="mb-4 text-2xl font-bold">Tablero Board {id}</h1>
 			<div className="w-fit rounded bg-blue-500 px-4 py-2 hover:bg-blue-400">
 				<Modal
 					open={isOpen}

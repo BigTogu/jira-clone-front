@@ -20,7 +20,6 @@ function ListBoards() {
 				<tr>
 					<th className="text-start">Nombre</th>
 					<th className="text-start">Clave</th>
-					<th className="text-start">Tipo</th>
 					<th className="text-start">Responsable</th>
 					<th className="text-start">Más Acciones</th>
 				</tr>
@@ -29,10 +28,9 @@ function ListBoards() {
 				{boards.map(board => (
 					<tr key={board.id} className="border-b-2 border-gray-200">
 						<td className="py-2">
-							<Link href={`/board/${board.id}`}>{board.name}</Link>
+							<Link href={`/board/${board.key}`}>{board.name}</Link>
 						</td>
-						<td className="py-2">{board.name}</td>
-						<td className="py-2">{board.name}</td>
+						<td className="py-2">{board.key}</td>
 						<td className="py-2">{board.name}</td>
 						<td className="py-2">Hola</td>
 					</tr>

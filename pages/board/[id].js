@@ -122,21 +122,23 @@ export default function BoardId() {
 	return (
 		<div className="container mx-auto p-4">
 			<h1 className="mb-4 text-2xl font-bold">Tablero BoardTitle</h1>
-
-			<Modal
-				open={isOpen}
-				setOpen={setIsOpen}
-				errorMessage={errorMessage}
-				triggerTitle={'Invitar a personas a Mi proyecto'}
-			>
-				<InvitationForm
+			<div className="w-fit rounded bg-blue-500 px-4 py-2 hover:bg-blue-400">
+				<Modal
+					open={isOpen}
 					setOpen={setIsOpen}
-					onSuccess={() => {
-						setIsOpen(false);
-						setErrorMessage('');
-					}}
-				/>
-			</Modal>
+					errorMessage={errorMessage}
+					triggerTitle={'Invitar a personas a Mi proyecto'}
+				>
+					<InvitationForm
+						setOpen={setIsOpen}
+						onSuccess={() => {
+							setIsOpen(false);
+							setErrorMessage('');
+						}}
+					/>
+				</Modal>
+			</div>
+
 			<div className="mt-3 flex gap-4">
 				{['POR HACER', 'EN CURSO', 'LISTO'].map(status => {
 					const filteredTodos = todos.filter(todo => todo.status === status);

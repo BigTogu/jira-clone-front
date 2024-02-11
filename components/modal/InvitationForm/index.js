@@ -1,20 +1,65 @@
-function InvitationForm({ handleSubmit }) {
+import React from 'react';
+
+function EmailInput() {
 	return (
-		<form onSubmit={handleSubmit} className="mb-2.5 flex items-center gap-3">
-			<label className="text-right  text-base" htmlFor="name">
-				email
+		<div>
+			<label className="mb-2 text-base" htmlFor="email">
+				Correo electrónico
 			</label>
 			<input
-				className="flex h-5 w-full flex-1 items-center rounded-md px-2.5 text-base shadow-md"
+				id="email"
+				type="email"
 				name="email"
-				placeholder="Frontend Project"
+				className="mb-4 h-10 w-full border-2 border-gray-200 px-2.5 text-base"
+				placeholder="ejemplo@correo.com"
+				required
 			/>
-			<div className="mt-6 flex justify-end">
+		</div>
+	);
+}
+
+function RoleSelector() {
+	return (
+		<div>
+			<label htmlFor="role" className="mb-2 text-base">
+				Role
+			</label>
+			<select
+				id="role"
+				name="role"
+				className="mb-4 h-10 w-full border-2 border-gray-300 bg-white px-2.5 text-base text-gray-700"
+				required
+			>
+				<option value="Administrador">Administrador</option>
+				<option value="Encargado">No Administrador</option>
+			</select>
+		</div>
+	);
+}
+
+function InvitationForm({ setOpen, handleSubmit }) {
+	function handleCancel(event) {
+		event.preventDefault();
+		setOpen(false);
+	}
+
+	return (
+		<form onSubmit={handleSubmit} className="flex flex-col">
+			<EmailInput />
+			<RoleSelector />
+			<div className="flex justify-end gap-4">
+				<button
+					onClick={handleCancel}
+					type="button"
+					className="rounded border-2 border-gray-200 px-4 py-2 text-gray-500 hover:border-blue-500 "
+				>
+					Cancelar
+				</button>
 				<button
 					type="submit"
-					className="hover:bg-green-300s  rounded-xl bg-green-400 px-4 py-2 text-white"
+					className="rounded bg-blue-400 px-4 py-2 text-white hover:bg-blue-500"
 				>
-					Save changes
+					Guardar
 				</button>
 			</div>
 		</form>

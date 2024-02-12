@@ -3,6 +3,7 @@ import getBoards from '../../services/board/get-boards.js';
 import { atom, useAtom } from 'jotai';
 import Link from 'next/link.js';
 import MoreForm from '../MoreForm';
+
 export const boardsAtom = atom([]);
 
 function ListBoards() {
@@ -16,22 +17,6 @@ function ListBoards() {
 			[boardId]: !prevStates[boardId],
 		}));
 	}
-
-	useEffect(() => {
-		function handleClickOutside(event) {
-			Object.entries(dropdownRefs.current).forEach(([key, ref]) => {
-				if (ref && !ref.contains(event.target)) {
-					setDropdownOpenStates(prevStates => ({
-						...prevStates,
-						[key]: false,
-					}));
-				}
-			});
-		}
-
-		document.addEventListener('mousedown', handleClickOutside);
-		return () => document.removeEventListener('mousedown', handleClickOutside);
-	}, []);
 
 	useEffect(() => {
 		getBoards().then(data => {
@@ -61,7 +46,7 @@ function ListBoards() {
 						<td className="py-2">{board.owner ? board.owner.username : '-'}</td>
 						<td className=" flex justify-end py-2">
 							<button
-								className="rounded px-2 hover:bg-blue-100"
+								className="rounded px-2 text-lg hover:bg-blue-100"
 								ref={el => (dropdownRefs.current[board.id] = el)}
 								onClick={() => toggleDropdown(board.id)}
 							>
@@ -71,7 +56,7 @@ function ListBoards() {
 							{dropdownOpenStates[board.id] && (
 								<div className="absolute z-10 rounded border-2 border-gray-300 bg-white">
 									<div className="flex  py-3">
-										<MoreForm />
+										<MoreForm board={board} />
 									</div>
 								</div>
 							)}

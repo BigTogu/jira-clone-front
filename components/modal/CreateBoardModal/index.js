@@ -2,35 +2,38 @@
 import React from 'react';
 import createBoard from '../../../services/board/create-board.js';
 import BoardForm from '../CreateBoardForm/index.js';
-
 import { useSetAtom } from 'jotai';
 import { boardsAtom } from '../../ListBoards/index.js';
 
-function CreateBoardModal({ onSuccess, onError }) {
+function CreateBoardModal({ setIsOpen }) {
 	const setBoards = useSetAtom(boardsAtom);
 
 	async function handleSubmit(event) {
 		event.preventDefault();
 
-		try {
-			const formData = new FormData(event.target);
-			const data = Object.fromEntries(formData.entries());
-			const successResponse = await createBoard(data);
+		const formData = new FormData(event.target);
+		const data = Object.fromEntries(formData.entries());
 
+		try {
+			const { data: successResponse } = await createBoard(data);
 			if (successResponse) {
-				const dataBoard = { ...successResponse.data };
-				setBoards(prevBoards => [...prevBoards, dataBoard]);
-				onSuccess();
-			} else {
-				onError('Error al crear el tablero. Intente nuevamente.');
+				setBoards(prevBoards => [...prevBoards, successResponse]);
+				setIsOpen(false);
 			}
 		} catch (error) {
 			console.error('Error al crear el tablero:', error);
-			onError('Se produjo un error al crear el tablero.');
 		}
 	}
 
-	return <BoardForm onSubmit={handleSubmit} />;
+	return (
+		<div>
+			<h2 className="text-lg font-semibold">Crear un nuevo tablero</h2>
+			<p className="my-2.5 text-base leading-4">
+				Invita a más personas. Haz click en guardar al terminar.
+			</p>
+			<BoardForm onSubmit={handleSubmit} />
+		</div>
+	);
 }
 
 export default CreateBoardModal;

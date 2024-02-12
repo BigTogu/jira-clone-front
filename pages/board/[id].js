@@ -8,8 +8,10 @@ import InvitationForm from '../../components/Modal/InvitationForm';
 import AssignedForm from '../../components/AssignedForm';
 import { Reorder } from 'framer-motion';
 import TodoModal from '../../components/TodoModal';
+import getBoard from '../../services/board/get-board.js';
 
 export const todosAtom = atom([]);
+export const boardAtom = atom([]);
 
 export function BoardItem({ content }) {
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -101,7 +103,14 @@ export function BoardColumn({ title, todos, status }) {
 export default function BoardId() {
 	const router = useRouter();
 	const { id } = router.query;
+
+	// useEffect(() => {
+	// 	getBoards().then(data => {
+	// 		if (data) setBoards(data.boards);
+	// 	});
+	// }, [setBoards]);
 	const [todos, setTodos] = useAtom(todosAtom);
+	const [board, setBoard] = useAtom(boardAtom);
 	const [isOpen, setIsOpen] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
 
@@ -116,12 +125,20 @@ export default function BoardId() {
 					console.error('Error fetching todos', error);
 					setErrorMessage('Error cargando los datos');
 				});
+			getBoard(id)
+				.then(data => {
+					if (data) setBoard(data.board);
+				})
+				.catch(error => {
+					console.error('Error fetching todos', error);
+					setErrorMessage('Error cargando los datos');
+				});
 		}
-	}, [id, setTodos]);
+	}, [id, setTodos, setBoard]);
 
 	return (
 		<div className="container mx-auto p-4">
-			<h1 className="mb-4 text-2xl font-bold">Tablero Board {id}</h1>
+			<h1 className="mb-4 text-2xl font-bold">Tablero Board {board.key}</h1>
 			<div className="w-fit rounded bg-blue-500 px-4 py-2 hover:bg-blue-400">
 				<Modal
 					open={isOpen}

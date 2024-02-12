@@ -3,7 +3,7 @@ import React from 'react';
 import createBoard from '../../../services/board/create-board.js';
 import BoardForm from '../CreateBoardForm/index.js';
 import { useSetAtom } from 'jotai';
-import { boardsAtom } from '../../ListBoards/index.js';
+import { boardsAtom } from '../../../store';
 
 function CreateBoardModal({ setIsOpen }) {
 	const setBoards = useSetAtom(boardsAtom);

@@ -1,27 +1,24 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 import getBoards from '../../services/board/get-boards.js';
-import { atom, useAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import Link from 'next/link.js';
-import MoreForm from '../MoreForm';
-
-export const boardsAtom = atom([]);
+import MoreActionsDropdown from '../MoreActionsDropdown/index.js';
+import { boardsAtom } from '../../store/index.js';
 
 function ListBoards() {
 	const [boards, setBoards] = useAtom(boardsAtom);
-	const [dropdownOpenStates, setDropdownOpenStates] = useState({});
-	const dropdownRefs = useRef({});
-
-	function toggleDropdown(boardId) {
-		setDropdownOpenStates(prevStates => ({
-			...prevStates,
-			[boardId]: !prevStates[boardId],
-		}));
-	}
 
 	useEffect(() => {
-		getBoards().then(data => {
-			if (data) setBoards(data.boards);
-		});
+		async function loadBoards() {
+			try {
+				const data = await getBoards();
+				if (data) setBoards(data.boards);
+			} catch (error) {
+				console.error('Error loading boards:', error);
+			}
+		}
+
+		loadBoards();
 	}, [setBoards]);
 
 	return (
@@ -38,28 +35,17 @@ function ListBoards() {
 				{boards.map(board => (
 					<tr key={board.id} className="border-b-2 border-gray-200">
 						<td className="py-2">
-							<Link href={`/board/${board.id}`} id={board.id}>
+							<Link
+								href={`/board/${board.id}`}
+								className="text-blue-500 hover:text-blue-700"
+							>
 								{board.name}
 							</Link>
 						</td>
 						<td className="py-2">{board.key}</td>
-						<td className="py-2">{board.owner ? board.owner.username : '-'}</td>
+						<td className="py-2">{board.owner.username}</td>
 						<td className=" flex justify-end py-2">
-							<button
-								className="rounded px-2 text-lg hover:bg-blue-100"
-								ref={el => (dropdownRefs.current[board.id] = el)}
-								onClick={() => toggleDropdown(board.id)}
-							>
-								...
-							</button>
-
-							{dropdownOpenStates[board.id] && (
-								<div className="absolute z-10 rounded border-2 border-gray-300 bg-white">
-									<div className="flex  py-3">
-										<MoreForm board={board} />
-									</div>
-								</div>
-							)}
+							<MoreActionsDropdown board={board} />
 						</td>
 					</tr>
 				))}

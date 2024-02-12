@@ -13,7 +13,7 @@ import MoreTodoForm from '../../components/MoreTodoForm';
 export const todosAtom = atom([]);
 export const boardAtom = atom([]);
 
-export function BoardItem({ content }) {
+export function TodoItem({ content }) {
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 	const dropdownRef = useRef(null);
 	const [isDropdownMoreOpen, setIsDropdownMoreOpen] = useState(false);
@@ -104,7 +104,7 @@ export function BoardColumn({ title, todos, status }) {
 			>
 				{todos.map(todo => (
 					<Reorder.Item key={todo.id} value={todo}>
-						<BoardItem content={todo.title} />
+						<TodoItem content={todo.title} />
 					</Reorder.Item>
 				))}
 			</Reorder.Group>

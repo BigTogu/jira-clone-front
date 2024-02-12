@@ -18,8 +18,7 @@ function CreateBoardModal({ onSuccess, onError }) {
 			const successResponse = await createBoard(data);
 
 			if (successResponse) {
-				const dataBoard = { ...data, id: successResponse.boardId };
-
+				const dataBoard = { ...successResponse.data };
 				setBoards(prevBoards => [...prevBoards, dataBoard]);
 				onSuccess();
 			} else {

@@ -1,6 +1,8 @@
 import React from 'react';
 import deleteBoard from '../../services/board/delete-board';
 
+//?selectedProjectType=software
+
 function MoreForm({ board }) {
 	async function onDelete(board) {
 		const deleted = await deleteBoard(board.id);

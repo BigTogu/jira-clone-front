@@ -9,17 +9,22 @@ import AssignedForm from '../../components/AssignedForm';
 import { Reorder } from 'framer-motion';
 import TodoModal from '../../components/TodoModal';
 import getBoard from '../../services/board/get-board.js';
-
+import MoreTodoForm from '../../components/MoreTodoForm';
 export const todosAtom = atom([]);
 export const boardAtom = atom([]);
 
 export function BoardItem({ content }) {
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 	const dropdownRef = useRef(null);
+	const [isDropdownMoreOpen, setIsDropdownMoreOpen] = useState(false);
+	const dropdownMoreRef = useRef(null);
 	const [isOpen, setIsOpen] = useState(false);
 
 	function toggleDropdown() {
 		setIsDropdownOpen(!isDropdownOpen);
+	}
+	function toggleDropdownMore() {
+		setIsDropdownMoreOpen(!isDropdownMoreOpen);
 	}
 	useEffect(() => {
 		function handleClickOutside(event) {
@@ -35,10 +40,31 @@ export function BoardItem({ content }) {
 		return () => document.removeEventListener('mousedown', handleClickOutside);
 	}, [isDropdownOpen]);
 	return (
-		<div className="relative mb-2 flex h-[4rem] w-full flex-col rounded bg-white p-2 shadow">
-			<Modal open={isOpen} setOpen={setIsOpen} triggerTitle={content}>
-				<TodoModal />
-			</Modal>
+		<div className="group relative mb-2 flex h-[4rem] w-full flex-col rounded bg-white p-2 shadow hover:bg-gray-100">
+			<div className="flex w-full flex-row justify-between">
+				<div className="flex items-center gap-2">
+					<Modal open={isOpen} setOpen={setIsOpen} triggerTitle={content}>
+						<TodoModal />
+					</Modal>
+					<p className="opacity-0 transition-opacity duration-150 ease-in-out hover:bg-gray-200 group-hover:opacity-100">
+						Ed
+					</p>
+				</div>
+				<button
+					ref={dropdownMoreRef}
+					onClick={toggleDropdownMore}
+					className="px-2 text-lg text-black opacity-0 transition-opacity duration-150 ease-in-out hover:bg-gray-200 group-hover:bg-gray-50 group-hover:opacity-100 "
+				>
+					...
+				</button>
+				{isDropdownMoreOpen && (
+					<div className="absolute z-10 rounded border-2 border-gray-300 bg-white">
+						<div className="flex  py-3">
+							<MoreTodoForm />
+						</div>
+					</div>
+				)}
+			</div>
 			<div className="flex w-full justify-end text-end">
 				<button
 					onClick={toggleDropdown}

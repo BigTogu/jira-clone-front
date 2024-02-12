@@ -104,11 +104,6 @@ export default function BoardId() {
 	const router = useRouter();
 	const { id } = router.query;
 
-	// useEffect(() => {
-	// 	getBoards().then(data => {
-	// 		if (data) setBoards(data.boards);
-	// 	});
-	// }, [setBoards]);
 	const [todos, setTodos] = useAtom(todosAtom);
 	const [board, setBoard] = useAtom(boardAtom);
 	const [isOpen, setIsOpen] = useState(false);

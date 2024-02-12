@@ -1,12 +1,37 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import getBoards from '../../services/board/get-boards.js';
 import { atom, useAtom } from 'jotai';
 import Link from 'next/link.js';
-
+import MoreForm from '../MoreForm';
 export const boardsAtom = atom([]);
 
 function ListBoards() {
 	const [boards, setBoards] = useAtom(boardsAtom);
+	const [dropdownOpenStates, setDropdownOpenStates] = useState({});
+	const dropdownRefs = useRef({});
+
+	function toggleDropdown(boardId) {
+		setDropdownOpenStates(prevStates => ({
+			...prevStates,
+			[boardId]: !prevStates[boardId],
+		}));
+	}
+
+	useEffect(() => {
+		function handleClickOutside(event) {
+			Object.entries(dropdownRefs.current).forEach(([key, ref]) => {
+				if (ref && !ref.contains(event.target)) {
+					setDropdownOpenStates(prevStates => ({
+						...prevStates,
+						[key]: false,
+					}));
+				}
+			});
+		}
+
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => document.removeEventListener('mousedown', handleClickOutside);
+	}, []);
 
 	useEffect(() => {
 		getBoards().then(data => {
@@ -33,8 +58,24 @@ function ListBoards() {
 							</Link>
 						</td>
 						<td className="py-2">{board.key}</td>
-						<td className="py-2">{board.name}</td>
-						<td className="py-2">Hola</td>
+						<td className="py-2">{board.owner ? board.owner.username : '-'}</td>
+						<td className=" flex justify-end py-2">
+							<button
+								className="rounded px-2 hover:bg-blue-100"
+								ref={el => (dropdownRefs.current[board.id] = el)}
+								onClick={() => toggleDropdown(board.id)}
+							>
+								...
+							</button>
+
+							{dropdownOpenStates[board.id] && (
+								<div className="absolute z-10 rounded border-2 border-gray-300 bg-white">
+									<div className="flex  py-3">
+										<MoreForm />
+									</div>
+								</div>
+							)}
+						</td>
 					</tr>
 				))}
 			</tbody>

@@ -1,5 +1,5 @@
 import Modal from '../../Common/Modal';
-import InviteModal from './InviteModal/InvitationModal';
+import InviteModal from './InvitationModal';
 
 function CreateBoard() {
 	return (

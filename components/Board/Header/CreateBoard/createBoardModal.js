@@ -1,9 +1,9 @@
 // createBoardForm.js
 import React from 'react';
-import createBoard from '../../../../../services/board/create-board.js';
+import createBoard from '../../../../services/board/create-board.js';
 import BoardForm from './createBoardForm.js';
 import { useSetAtom } from 'jotai';
-import { boardsAtom } from '../../../../../store/index.js';
+import { boardsAtom } from '../../../../store/index.js';
 
 function CreateBoardModal({ setIsOpen }) {
 	const setBoards = useSetAtom(boardsAtom);

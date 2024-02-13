@@ -1,5 +1,5 @@
 import Modal from '../../../Common/Modal';
-import CreateBoardModal from './CreateBoardModal';
+import CreateBoardModal from './createBoardModal.js';
 
 function CreateBoard() {
 	return (

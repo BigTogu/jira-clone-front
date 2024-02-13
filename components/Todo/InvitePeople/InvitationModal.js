@@ -1,7 +1,7 @@
 // createBoardForm.js
 import React from 'react';
-import inviteToBoard from '../../../../../services/board/invite-to-board.js';
-import InvitationForm from '../InvitationForm/index.js';
+import inviteToBoard from '../../../services/board/invite-to-board.js';
+import InvitationForm from './invitationForm.js';
 
 function CreateInvitationForm({ onSuccess, onError, board }) {
 	async function handleSubmit(event) {

@@ -27,6 +27,7 @@ function RoleSelector() {
 			<select
 				id="role"
 				name="role"
+				aria-label="Seleccionar un rol"
 				className="mb-4 h-10 w-full border-2 border-gray-300 bg-white px-2.5 text-base text-gray-700"
 				required
 			>
@@ -34,6 +35,19 @@ function RoleSelector() {
 				<option value="Encargado">No Administrador</option>
 			</select>
 		</div>
+	);
+}
+
+function FormButton({ type, onClick, className, children, ariaLabel }) {
+	return (
+		<button
+			type={type}
+			onClick={onClick}
+			className={`rounded px-4 py-2 ${className}`}
+			aria-label={ariaLabel}
+		>
+			{children}
+		</button>
 	);
 }
 
@@ -48,19 +62,21 @@ function InvitationForm({ setOpen, handleSubmit }) {
 			<EmailInput />
 			<RoleSelector />
 			<div className="flex justify-end gap-4">
-				<button
-					onClick={handleCancel}
+				<FormButton
 					type="button"
-					className="rounded border-2 border-gray-200 px-4 py-2 text-gray-500 hover:border-blue-500 "
+					onClick={handleCancel}
+					className="border-2 border-gray-200 text-gray-500 hover:border-blue-500"
+					ariaLabel="Cancelar y cerrar el formulario"
 				>
 					Cancelar
-				</button>
-				<button
+				</FormButton>
+				<FormButton
 					type="submit"
-					className="rounded bg-blue-400 px-4 py-2 text-white hover:bg-blue-500"
+					className="bg-blue-400 text-white hover:bg-blue-500"
+					ariaLabel="Guardar los cambios"
 				>
 					Guardar
-				</button>
+				</FormButton>
 			</div>
 		</form>
 	);

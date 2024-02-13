@@ -23,6 +23,7 @@ function AssignedForm() {
 			<EmailInput />
 			<button
 				type="submit"
+				aria-label="Guardar"
 				className="rounded bg-blue-400 py-0.5 text-white hover:bg-blue-500"
 			>
 				Guardar

@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import getTodos from '../../services/todos/get-todos.js';
 import { useEffect } from 'react';
 import { useAtom } from 'jotai';
-import ModalButton from '../../components/Board/Header/Modal/ModalButton';
+import ModalButton from '../../components/Todo/InvitePeople';
 import getBoard from '../../services/board/get-board.js';
 import { todosAtom, boardAtom } from '../../store';
 import TodoStatusColumn from '../../components/Todo/TodoStatusColumn.js';

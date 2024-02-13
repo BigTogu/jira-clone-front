@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Reorder } from 'framer-motion';
-import CreateTodoForm from '../../../components/CreateTodoForm';
-import TodoItem from '../todoItem';
+import CreateTodo from './TodoItem/CreateTodo';
+import TodoItem from './TodoItem';
 import { useSetAtom } from 'jotai';
-import { todosAtom } from '../../../store';
+import { todosAtom } from '../../store';
 
 function TodoList({ todos, onReorder }) {
 	return (
@@ -30,7 +30,7 @@ function CreateButton({ onClick }) {
 	);
 }
 
-function BoardColumn({ title, todos, status }) {
+function TodoColumn({ title, todos, status }) {
 	const [showCreateForm, setShowCreateForm] = useState(false);
 	const setItems = useSetAtom(todosAtom);
 
@@ -44,10 +44,7 @@ function BoardColumn({ title, todos, status }) {
 			<TodoList todos={todos} onReorder={handleReorder} />
 
 			{showCreateForm ? (
-				<CreateTodoForm
-					onCancel={() => setShowCreateForm(false)}
-					status={status}
-				/>
+				<CreateTodo onCancel={() => setShowCreateForm(false)} status={status} />
 			) : (
 				<CreateButton onClick={() => setShowCreateForm(true)} />
 			)}
@@ -55,4 +52,4 @@ function BoardColumn({ title, todos, status }) {
 	);
 }
 
-export default BoardColumn;
+export default TodoColumn;

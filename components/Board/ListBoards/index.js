@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import getBoards from '../../services/board/get-boards.js';
+import getBoards from '../../../services/board/get-boards.js';
 import { useAtom } from 'jotai';
 import Link from 'next/link.js';
-import MoreActionsDropdown from '../MoreActionsDropdown/index.js';
-import { boardsAtom } from '../../store/index.js';
+import MoreActionsDropdown from './MoreActions';
+import { boardsAtom } from '../../../store/index.js';
 
 function ListBoards() {
 	const [boards, setBoards] = useAtom(boardsAtom);

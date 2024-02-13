@@ -1,6 +1,6 @@
-import BoardColumn from '../../pages/board/columnBoard';
+import TodoColumn from './TodoColumn.js';
 
-function BoardStatusColumns({ todos }) {
+function TodoStatusColumn({ todos }) {
 	const statuses = ['POR HACER', 'EN CURSO', 'LISTO'];
 
 	return (
@@ -8,7 +8,7 @@ function BoardStatusColumns({ todos }) {
 			{statuses.map(status => {
 				const filteredTodos = todos.filter(todo => todo.status === status);
 				return (
-					<BoardColumn
+					<TodoColumn
 						key={status}
 						title={status}
 						todos={filteredTodos}
@@ -20,4 +20,4 @@ function BoardStatusColumns({ todos }) {
 	);
 }
 
-export default BoardStatusColumns;
+export default TodoStatusColumn;

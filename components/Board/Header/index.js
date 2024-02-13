@@ -1,4 +1,4 @@
-import CreateBoard from '../../CreateBoard';
+import CreateBoard from './CreateBoard';
 
 function Header() {
 	return (

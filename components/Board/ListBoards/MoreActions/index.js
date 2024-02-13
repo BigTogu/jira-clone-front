@@ -1,4 +1,4 @@
-import MoreActionsForm from '../MoreActionsForm';
+import MoreActionsForm from '../BoardItem/MoreActions';
 import { useState } from 'react';
 
 function MoreActionsDropdown({ board }) {

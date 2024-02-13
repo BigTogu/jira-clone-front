@@ -1,9 +1,9 @@
-import createTodo from '../../services/todos/create-todo.js';
+import createTodo from '../../../../services/todos/create-todo.js';
 import { useRouter } from 'next/router';
 import { useSetAtom } from 'jotai';
-import { todosAtom } from '../../store';
+import { todosAtom } from '../../../../store/index.js';
 
-function CreateTodoForm({ onCancel, status }) {
+function CreateTodo({ onCancel, status }) {
 	const setTodos = useSetAtom(todosAtom);
 	const { query } = useRouter();
 
@@ -55,4 +55,4 @@ function CreateTodoForm({ onCancel, status }) {
 	);
 }
 
-export default CreateTodoForm;
+export default CreateTodo;

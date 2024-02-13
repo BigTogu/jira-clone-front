@@ -1,5 +1,5 @@
-import Modal from '../Modal';
-import InvitationForm from '../Modal/InvitationForm';
+import Modal from '../../../../Common/Modal';
+import InvitationForm from '../InvitationForm';
 
 function ModalButton() {
 	return (

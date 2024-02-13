@@ -17,7 +17,7 @@ function EmailInput() {
 	);
 }
 
-function AssignedForm() {
+function AssignTodo() {
 	return (
 		<form className="flex flex-col px-4">
 			<EmailInput />
@@ -32,4 +32,4 @@ function AssignedForm() {
 	);
 }
 
-export default AssignedForm;
+export default AssignTodo;

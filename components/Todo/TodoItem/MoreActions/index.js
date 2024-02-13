@@ -11,7 +11,7 @@ function TodoActionButton({ children, onClick }) {
 	);
 }
 
-function MoreTodoForm() {
+function MoreActions() {
 	function handleMoveToBottom() {
 		alert('Moviendo a la parte inferior...');
 	}
@@ -44,4 +44,4 @@ function MoreTodoForm() {
 	);
 }
 
-export default MoreTodoForm;
+export default MoreActions;

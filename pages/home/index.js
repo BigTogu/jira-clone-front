@@ -1,5 +1,5 @@
-import ListBoards from '../../components/ListBoards';
-import Header from '../../components/Header/Home';
+import ListBoards from '../../components/Board/ListBoards';
+import Header from '../../components/Board/Header';
 
 export default function Home() {
 	return (

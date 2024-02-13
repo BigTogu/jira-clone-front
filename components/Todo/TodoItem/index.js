@@ -1,9 +1,9 @@
 /* eslint-disable indent */
 import { useEffect, useReducer, useCallback, useRef } from 'react';
-import Modal from '../../../components/Modal';
-import AssignedForm from '../../../components/AssignedForm';
-import TodoModal from '../../../components/TodoModal';
-import MoreTodoForm from '../../../components/MoreTodoForm';
+import Modal from '../../Common/Modal';
+import AssignTodo from './AssignTodo';
+import TodoModal from './TodoModal';
+import MoreActions from './MoreActions';
 
 function todoReducer(state, action) {
 	switch (action.type) {
@@ -69,7 +69,7 @@ function TodoItem({ content }) {
 				{state.isDropdownMoreOpen && (
 					<div className="absolute z-10 rounded border-2 border-gray-300 bg-white">
 						<div className="flex  py-3">
-							<MoreTodoForm />
+							<MoreActions />
 						</div>
 					</div>
 				)}
@@ -86,7 +86,7 @@ function TodoItem({ content }) {
 					className="absolute right-[30px] top-[30px] z-10 mt-1 w-56 origin-top-right rounded-md bg-white shadow-lg"
 				>
 					<div className="py-1">
-						<AssignedForm />
+						<AssignTodo />
 					</div>
 				</div>
 			)}

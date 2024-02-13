@@ -2,10 +2,10 @@ import { useRouter } from 'next/router';
 import getTodos from '../../services/todos/get-todos.js';
 import { useEffect } from 'react';
 import { useAtom } from 'jotai';
-import ModalButton from '../../components/ModalButton/index.js';
+import ModalButton from '../../components/Board/Header/Modal/ModalButton';
 import getBoard from '../../services/board/get-board.js';
 import { todosAtom, boardAtom } from '../../store';
-import BoardStatusColumns from '../../components/BoardStatusColumns/index.js';
+import TodoStatusColumn from '../../components/Todo/TodoStatusColumn.js';
 
 export default function BoardId() {
 	const router = useRouter();
@@ -40,7 +40,7 @@ export default function BoardId() {
 		<div className="container mx-auto p-4">
 			<h1 className="mb-4 text-2xl font-bold">Tablero Board {board.key}</h1>
 			<ModalButton />
-			<BoardStatusColumns todos={todos} />
+			<TodoStatusColumn todos={todos} />
 		</div>
 	);
 }

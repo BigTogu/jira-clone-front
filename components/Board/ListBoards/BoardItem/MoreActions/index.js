@@ -1,7 +1,7 @@
 import React from 'react';
-import deleteBoard from '../../services/board/delete-board';
+import deleteBoard from '../../../../../services/board/delete-board.js';
 import { useSetAtom } from 'jotai';
-import { boardsAtom } from '../../store';
+import { boardsAtom } from '../../../../../store';
 
 function MoreActionsForm({ board }) {
 	const setBoards = useSetAtom(boardsAtom);

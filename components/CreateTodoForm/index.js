@@ -1,12 +1,11 @@
 import createTodo from '../../services/todos/create-todo.js';
 import { useRouter } from 'next/router';
 import { useSetAtom } from 'jotai';
-import { todosAtom } from '../../pages/board/[id].js';
+import { todosAtom } from '../../store';
 
 function CreateTodoForm({ onCancel, status }) {
 	const setTodos = useSetAtom(todosAtom);
-	const router = useRouter();
-	const { id } = router.query;
+	const { query } = useRouter();
 
 	async function handleSubmit(event) {
 		event.preventDefault();
@@ -19,7 +18,7 @@ function CreateTodoForm({ onCancel, status }) {
 				console.error('The title cannot be empty.');
 				return;
 			}
-			const newData = { ...data, boardId: id, status };
+			const newData = { ...data, boardId: query.id, status };
 			const successResponse = await createTodo(newData);
 
 			if (successResponse) {

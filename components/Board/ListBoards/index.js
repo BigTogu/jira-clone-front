@@ -9,6 +9,7 @@ function ListBoards() {
 	const [boards, setBoards] = useAtom(boardsAtom);
 	const [currentPage, setCurrentPage] = useState(0);
 	const [totalPages, setTotalPages] = useState(0);
+
 	useEffect(() => {
 		async function loadBoards(page) {
 			try {
@@ -66,19 +67,49 @@ function ListBoards() {
 			</table>
 			<div className="pagination-controls text-gray-400">
 				<button
+					className="disabled:cursor-not-allowed disabled:opacity-50"
 					onClick={() => changePage(currentPage - 1)}
 					disabled={currentPage === 0}
 				>
-					&lt;
+					<svg
+						class="h-2.5 w-2.5 rtl:rotate-180"
+						aria-hidden="true"
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 6 10"
+					>
+						<path
+							stroke="currentColor"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M5 1 1 5l4 4"
+						/>
+					</svg>{' '}
 				</button>
-				<span className="mx-3 rounded bg-blue-100 px-3 py-1.5 text-blue-800">
+				<span className="mx-3 rounded bg-blue-100 px-3 py-1.5 text-blue-800 ">
 					{currentPage + 1}
 				</span>
 				<button
+					className="disabled:cursor-not-allowed disabled:opacity-50"
 					onClick={() => changePage(currentPage + 1)}
 					disabled={currentPage === totalPages - 1 || totalPages === 0}
 				>
-					&gt;
+					<svg
+						class="h-2.5 w-2.5 rtl:rotate-180"
+						aria-hidden="true"
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 6 10"
+					>
+						<path
+							stroke="currentColor"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="m1 9 4-4-4-4"
+						/>
+					</svg>
 				</button>
 			</div>
 		</>

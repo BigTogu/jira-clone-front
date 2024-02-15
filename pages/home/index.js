@@ -1,16 +1,52 @@
 import ListBoards from '../../components/Board/ListBoards';
 import Header from '../../components/Board/Header';
+import { useState } from 'react';
 
-export function SearchBar({ placeholder }) {
+export function SearchBar() {
+	const [inputValue, setInputValue] = useState('');
+
+	function handleInputChange(event) {
+		setInputValue(event.target.value);
+	}
 	return (
-		<div className="mb-7 w-fit rounded border-2 border-gray-300  py-1.5 hover:bg-gray-50">
-			<input
-				type="text"
-				placeholder={placeholder}
-				className=" bg-transparent px-2 ring-0 focus:outline-none"
-			/>
-			<span className="px-2">Q</span>
-		</div>
+		<form className="w-fit">
+			<label
+				for="default-search"
+				className="sr-only mb-2 text-sm font-medium text-gray-900 dark:text-white"
+			>
+				Search
+			</label>
+			<div className="relative">
+				<input
+					type="search"
+					id="default-search"
+					class=" w-full rounded border border-gray-300 p-2 text-sm text-gray-900  focus:ring-blue-500 "
+					placeholder="Search Project"
+					required
+					value={inputValue}
+					onChange={handleInputChange}
+				/>
+				<div
+					className={`absolute bottom-[0.65rem] end-2.5 text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300 ${inputValue ? 'hidden' : ''}`}
+				>
+					<svg
+						className="h-4 w-4 text-gray-500 dark:text-gray-400"
+						aria-hidden="true"
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 20 20"
+					>
+						<path
+							stroke="currentColor"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+						/>
+					</svg>
+				</div>
+			</div>
+		</form>
 	);
 }
 export default function Home() {
@@ -18,7 +54,7 @@ export default function Home() {
 		<section className="mx-7 my-9 flex flex-col">
 			<Header />
 
-			<SearchBar placeholder="Buscar proyectos" />
+			<SearchBar />
 
 			<ListBoards />
 		</section>

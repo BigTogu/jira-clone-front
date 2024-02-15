@@ -1,7 +1,7 @@
 import React from 'react';
 import registerCall from '../../services/auth-services/register-call.js';
 import SuccessSubmit from '../../UI/succesSubmit/index.js';
-import Form from '../../components/Form/index.js';
+import Form from '../../components/Common/Form';
 import useFormSubmission from '../../hooks/hooks.js';
 import Slogan from '../../components/Common/Slogan/index.js';
 

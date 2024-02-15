@@ -3,7 +3,7 @@ import SuccessSubmit from '../../UI/succesSubmit/index.js';
 
 import useFormSubmission from '../../hooks/hooks.js';
 import loginCall from '../../services/auth-services/login-call.js';
-import Form from '../../components/Form/index.js';
+import Form from '../../components/Common/Form/index.js';
 
 const loginFields = [
 	{

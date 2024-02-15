@@ -3,7 +3,7 @@ import InputField from '../Form/InputField/index.js';
 import PasswordComponent from '../Form/PasswordField/index.js';
 import Button from '../Form/ButtonForm/index.js';
 import Image from 'next/image';
-import IconoJira from '../../public/assets/icono_Jira_Clone.svg';
+import IconoJira from '../../../public/assets/icono_Jira_Clone.svg';
 
 function FormHeader() {
 	return (

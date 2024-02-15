@@ -1,5 +1,13 @@
-function getBoards() {
-	return fetch('http://localhost:8000/boards', {
+export function getPagination(page, size) {
+	const limit = size ? +size : 3;
+	const offset = page ? page * limit : 0;
+
+	return { limit, offset };
+}
+
+function getBoards(page) {
+	const { limit, offset } = getPagination(page, 2);
+	return fetch(`http://localhost:8000/boards?limit=${limit}&offset=${offset}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',

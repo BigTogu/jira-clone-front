@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import getBoards from '../../../services/board/get-boards.js';
-import { useAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import Link from 'next/link.js';
 import MoreActionsDropdown from './BoardItem/MoreActionsDropdown';
 import { boardsAtom } from '../../../store/index.js';
 
-function ListBoards() {
-	const [boards, setBoards] = useAtom(boardsAtom);
+function ListBoards({ filtered }) {
+	const setBoards = useSetAtom(boardsAtom);
 	const [currentPage, setCurrentPage] = useState(0);
 	const [totalPages, setTotalPages] = useState(0);
 
@@ -42,7 +42,7 @@ function ListBoards() {
 					</tr>
 				</thead>
 				<tbody>
-					{boards.map(board => (
+					{filtered.map(board => (
 						<tr
 							key={board.id}
 							className=" border-b-2 border-gray-200 hover:bg-gray-100"

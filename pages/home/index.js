@@ -12,18 +12,20 @@ export function SearchBar() {
 	function searchFilter(array) {
 		return array.filter(el => el.name.toLowerCase().includes(query));
 	}
-
-	// //Applying our search filter function to our array of countries recieved from the API
 	const filtered = searchFilter(boards);
 
-	//Handling the input on our search bar
 	function handleChange(e) {
 		setQuery(e.target.value);
 	}
 
 	return (
 		<>
-			<form className="w-fit">
+			<form
+				className="w-fit"
+				onSubmit={e => {
+					e.preventDefault();
+				}}
+			>
 				<label
 					for="default-search"
 					className="sr-only mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -62,7 +64,7 @@ export function SearchBar() {
 				</div>
 			</form>
 
-			<ListBoards filtered={filtered} />
+			<ListBoards filtered={filtered} query={query} />
 		</>
 	);
 }

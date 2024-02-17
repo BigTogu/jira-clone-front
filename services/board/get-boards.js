@@ -5,15 +5,18 @@ export function getPagination(page, size) {
 	return { limit, offset };
 }
 
-function getBoards(page) {
+function getBoards(page, search) {
 	const { limit, offset } = getPagination(page, 2);
-	return fetch(`http://localhost:8000/boards?limit=${limit}&offset=${offset}`, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json',
-			authorization: 'Bearer ' + localStorage.getItem('token'),
+	return fetch(
+		`http://localhost:8000/boards?limit=${limit}&offset=${offset}&search=${search}`,
+		{
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				authorization: 'Bearer ' + localStorage.getItem('token'),
+			},
 		},
-	})
+	)
 		.then(response => {
 			if (response.ok) {
 				return response.json();

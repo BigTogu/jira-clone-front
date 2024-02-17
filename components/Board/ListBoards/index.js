@@ -5,15 +5,15 @@ import Link from 'next/link.js';
 import MoreActionsDropdown from './BoardItem/MoreActionsDropdown';
 import { boardsAtom } from '../../../store/index.js';
 
-function ListBoards({ filtered }) {
+function ListBoards({ filtered, query }) {
 	const setBoards = useSetAtom(boardsAtom);
 	const [currentPage, setCurrentPage] = useState(0);
 	const [totalPages, setTotalPages] = useState(0);
 
 	useEffect(() => {
-		async function loadBoards(page) {
+		async function loadBoards(page, query) {
 			try {
-				const data = await getBoards(page);
+				const data = await getBoards(page, query);
 				if (data) {
 					setBoards(data.boards);
 					setTotalPages(data.totalPage);
@@ -23,8 +23,8 @@ function ListBoards({ filtered }) {
 			}
 		}
 
-		loadBoards(currentPage);
-	}, [setBoards, currentPage]);
+		loadBoards(currentPage, query);
+	}, [setBoards, currentPage, query]);
 
 	function changePage(page) {
 		setCurrentPage(page);

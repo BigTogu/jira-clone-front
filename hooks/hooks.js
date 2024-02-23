@@ -1,8 +1,20 @@
-// hooks/useFormSubmission.js
 import { useState } from 'react';
 import { validateFields } from '../utils/validate';
 
-function useFormSubmission(successCallback) {
+export function usePagination(initialPage = 0, initialTotalPages = 0) {
+	const [currentPage, setCurrentPage] = useState(initialPage);
+	const [totalPages, setTotalPages] = useState(initialTotalPages);
+
+	function changePage(newPage) {
+		if (newPage >= 0 && newPage < totalPages) {
+			setCurrentPage(newPage);
+		}
+	}
+
+	return { currentPage, totalPages, setTotalPages, changePage };
+}
+
+export function useFormSubmission(successCallback) {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isSubmissionSuccessful, setIsSubmissionSuccessful] = useState(false);
 
@@ -31,5 +43,3 @@ function useFormSubmission(successCallback) {
 	}
 	return { isSubmissionSuccessful, handleSubmit, isLoading };
 }
-
-export default useFormSubmission;

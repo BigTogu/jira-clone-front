@@ -2,11 +2,11 @@
 import React from 'react';
 import createBoard from '../../../../services/board/create-board.js';
 import BoardForm from './createBoardForm.js';
-import { useSetAtom } from 'jotai';
-import { boardsAtom } from '../../../../store/index.js';
+// import { useSetAtom } from 'jotai';
+// import { boardsAtom } from '../../../../store/index.js';
 
 function CreateBoardModal({ setIsOpen }) {
-	const setBoards = useSetAtom(boardsAtom);
+	// const setBoards = useSetAtom(boardsAtom);
 
 	async function handleSubmit(event) {
 		event.preventDefault();
@@ -17,7 +17,7 @@ function CreateBoardModal({ setIsOpen }) {
 		try {
 			const { data: successResponse } = await createBoard(data);
 			if (successResponse) {
-				setBoards(prevBoards => [...prevBoards, successResponse]);
+				// setBoards(prevBoards => [...prevBoards, successResponse]);
 				setIsOpen(false);
 			}
 		} catch (error) {
